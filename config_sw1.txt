@@ -1,0 +1,18 @@
+Current configuration : 2033 bytes
+!
+version 15.0
+!
+hostname sw1
+!
+interface Ethernet0/0
+ duplex auto
+!
+interface Ethernet0/1
+ switchport trunk encapsulation dot1q
+ switchport trunk allowed vlan 100
+ switchport mode trunk
+ duplex auto
+ spanning-tree portfast edge trunk
+!
+alias exec show_ip_route show ip route
+!

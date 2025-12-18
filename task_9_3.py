@@ -1,3 +1,5 @@
+from graphviz import Graph
+
 def parse_cdp_neighbors(command_output):
     result = {}
     lines = command_output.strip().split("\n")
@@ -14,13 +16,29 @@ def parse_cdp_neighbors(command_output):
 def create_network_map(filenames):
     topology = {}
     for filename in filenames:
-        with open(filename) as f:
-            file_topology = parse_cdp_neighbors(f.read())
-            for key, value in file_topology.items():
-                if not topology.get(value) == key:
-                    topology[key] = value
+        try:
+            with open(filename) as f:
+                file_topology = parse_cdp_neighbors(f.read())
+                for key, value in file_topology.items():
+                    if not topology.get(value) == key:
+                        topology[key] = value
+        except FileNotFoundError:
+            continue
     return topology
+
+def draw_topology(topology_dict):
+    styles = {'node': {'shape': 'oval'}}
+    g = Graph(format='png', node_attr=styles['node'])
+    for local, remote in topology_dict.items():
+        
+        g.edge(local[0], remote[0], label=f"{local[1]} - {remote[1]}")
+    g.render('topology_graph', view=False)
 
 if __name__ == "__main__":
     infiles = ["sh_cdp_n_sw1.txt", "sh_cdp_n_r1.txt", "sh_cdp_n_r2.txt", "sh_cdp_n_r3.txt"]
-    print(create_network_map(infiles))
+    network_map = create_network_map(infiles)
+    
+    for local, remote in network_map.items():
+        print(f"{local[0]} {local[1]} --- {remote[0]} {remote[1]}")
+    
+    draw_topology(network_map)

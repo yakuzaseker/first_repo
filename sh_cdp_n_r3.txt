@@ -1,0 +1,5 @@
+R3>show cdp neighbors
+Device ID    Local Intrfce   Holdtme     Capability       Platform    Port ID
+SW1          Eth 0/3         150         S I              WS-C2960    Eth 0/0
+R4           Eth 0/1         145         R                7200        Eth 0/0
+R5           Eth 0/2         145         R                7200        Eth 0/0

@@ -1,0 +1,9 @@
+graph {
+	node [shape=oval]
+	SW1 -- R1 [label="Eth0/1 - Eth0/0"]
+	SW1 -- R2 [label="Eth0/2 - Eth0/0"]
+	SW1 -- R3 [label="Eth0/3 - Eth0/0"]
+	R3 -- SW1 [label="Eth0/3 - Eth0/0"]
+	R3 -- R4 [label="Eth0/1 - Eth0/0"]
+	R3 -- R5 [label="Eth0/2 - Eth0/0"]
+}

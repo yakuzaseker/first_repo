@@ -15,4 +15,6 @@ def parse_cdp_neighbors(command_output):
 
 if __name__ == "__main__":
     with open("sh_cdp_n_sw1.txt") as f:
-        print(parse_cdp_neighbors(f.read()))
+        topology = parse_cdp_neighbors(f.read())
+        for local, remote in topology.items():
+            print(f"{local[0]} {local[1]} -> {remote[0]} {remote[1]}")

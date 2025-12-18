@@ -1,6 +1,11 @@
 from sys import argv
 
-filename = argv[1]
+if len(argv) > 1:
+    filename = argv[1]
+else:
+    filename = "config_sw1.txt"
+
+ignore = ["duplex", "alias", "configuration"]
 ignore = ["duplex", "alias", "configuration"]
 
 with open(filename, "r") as f:
